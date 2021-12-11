@@ -1,8 +1,36 @@
 .container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#input {
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 35px;
+  width: 200px;
+  padding: 8px;
+  margin-right: 20px;
+}
+
+#select {
+  height: 51px;
+  width: fit-content;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cards-container {
+  width: 70%;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  row-gap: 15px;
+  gap: 15px;
+  margin-top: 30px;
+  font-family: 'Anton', sans-serif;
 }
 
 .pokemon-card {
@@ -34,5 +62,9 @@
   border-radius: 50%;
   padding: 20px;
   background-color: #e3e3e3;
+}
+
+.name {
+  font-weight: bold;
 }
 
