@@ -8,10 +8,13 @@ function App() {
 
       <div className='container'>
 
-        <PokeCard name={'Charmander'} />
-        <PokeCard name={'Pikachu'} />
-        <PokeCard name={'Onix'} />
-        <PokeCard name={'Bulbasaur'} />
+        <PokeCard name='Charmander' />
+        <PokeCard name='Pikachu' />
+        <PokeCard name='Onix' />
+        <PokeCard name='Bulbasaur' />
+        <PokeCard name='Squirtle' />
+        <PokeCard name='Caterpie' />
+        <PokeCard name='Blastoise' />
 
       </div>
 

@@ -9,6 +9,8 @@ export default function handleGenerateBg(type) {
             return '#83ba36'
         case 'rock':
             return '#9f806f'
+        case 'water':
+            return '#5abcd8'
         default:
             return '#ddd'
     }

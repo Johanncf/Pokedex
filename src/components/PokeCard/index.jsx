@@ -1,6 +1,6 @@
-// import handleGenerateBg from "../../utils/colorTypes";
-import { useState, useEffect } from 'react'
-import handleGenerateBg from '../../utils/colorTypes';
+import { useState, useEffect, useCallback } from 'react'
+import handleGenerateBg from '../../utils/colorTypes'
+import PropTypes from 'prop-types'
 import axios from 'axios';
 
 function PokeCard({ name }) {
@@ -9,32 +9,30 @@ function PokeCard({ name }) {
     const [hp, setHp] = useState('')
     const [type, setType] = useState('')
     const [photo, setPhoto] = useState('')
-    const [pokemon, setPokemon] = useState(name)
-    const [pokeData, setPokeData] = useState([])
 
 
 
-    async function getData() {
-        const toArray = []
-        try {
-            let url = "https://pokeapi.co/api/v2/pokemon/" + pokemon.toLowerCase()
-            let response = await axios.get(url)
-            toArray.push(response.data)
-            setAtk(response.data.stats[1].base_stat)
-            setDef(response.data.stats[2].base_stat)
-            setHp(response.data.stats[0].base_stat)
-            setType(response.data.types[0].type.name)
-            setPhoto(response.data.sprites.other.dream_world.front_default)
-            setPokeData(toArray)
+    const getData = useCallback(async () => {
 
-        } catch (e) {
-            console.log(e)
+            try {
+                let url = `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
+                let response = await axios.get(url)
+                setAtk(response.data.stats[1].base_stat)
+                setDef(response.data.stats[2].base_stat)
+                setHp(response.data.stats[0].base_stat)
+                setType(response.data.types[0].type.name)
+                setPhoto(response.data.sprites.other.dream_world.front_default)
+    
+            } catch (e) {
+                console.log(e)
+            }
+    
         }
-    }
+    ) 
 
     useEffect(() => {
         getData()
-    }, [])
+    }, [getData])
 
     const typeColor = handleGenerateBg(type)
     return (
@@ -54,6 +52,10 @@ function PokeCard({ name }) {
             </div>
         </div>
     )
+}
+
+PokeCard.propTypes = {
+    name: PropTypes.string.isRequired
 }
 
 export default PokeCard;
