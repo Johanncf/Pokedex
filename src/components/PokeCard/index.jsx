@@ -27,7 +27,8 @@ function PokeCard({ name }) {
                 console.log(e)
             }
     
-        }
+        },
+        [name]
     ) 
 
     useEffect(() => {
