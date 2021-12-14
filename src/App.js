@@ -1,33 +1,44 @@
 import './App.css';
+import Home from './pages/Home';
 import PokeCard from './components/PokeCard';
-
+import PokemonSearchForm from './components/PokemonSearch';
+import { getPokemons } from './dependencies/apiCall';
+import { useEffect, useState } from 'react'
 function App() {
+
+  const [pokemonName, setPokemonName] = useState('')
+  const [pokemons, setPokemons] = useState([])
+
+  function getPokemon() {
+
+    const input = document.getElementById('input')
+    setPokemonName(input.value)
+    console.log(input.value)
+
+  }
+
+  useEffect(() => {
+    getPokemons("?limit=2000")
+    .then(response => {
+      setPokemons(response.results)
+    })
+  })
+
   return (
     <div className="container">
       <h1 className="title">Pokédex</h1>
 
-      <form className="poke-form">
-        <input id="input" type="text" placeholder="Quem é esse pokemón?" />
-        <button id="select" type="button">Escolher</button>
-      </form>
+      <PokemonSearchForm sourcePokemonList={pokemons} setPokemons={setPokemons} listSize={pokemons.length} />
 
-      <div className="cards-container">
 
-        <PokeCard name="Charmander" />
-        <PokeCard name="Pikachu" />
-        <PokeCard name="Onix" />
-        <PokeCard name="Bulbasaur" />
-        <PokeCard name="Squirtle" />
-        <PokeCard name="Caterpie" />
-        <PokeCard name="Blastoise" />
-        <PokeCard name="Charizard" />
-        <PokeCard name="Pinsir" />
-        <PokeCard name="Pidgeot" />
-        <PokeCard name="Ekans" />
-        <PokeCard name="Zubat" />
-        <PokeCard name="Raichu" />
+      <div className="cards-container" >
+
+        <Home quantPokes="?limit=2000" className='home' />
 
       </div>
+
+
+
 
     </div>
   );
